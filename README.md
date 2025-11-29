@@ -3,18 +3,17 @@
 This is am easy quiz game for classrooms, made with PHP/js,css,html.
 No database needed, just json files to store data.
 
-Questions and answers are stored in json files (quizdata.json).
+## Instructions
 
-Users students play the quiz from their PC or device (data are saved in risultati.json).
+Questions and answers are stored in topics folder as json files (example: arduino.json).
+In questions you can use HTML, short questions are preferred.
+If you use <img> tags in HTML, store the images in a subfolder with the same name of the topic (example: "arduino" folder inside "topics").
+Place the players names in the players.json file.
+
+Users students play the quiz from their PC or device (at the end data are saved in risultati.json).
 
 Results are shown in realtime on the teacher device or on LIM as a top hit score ranking page.
 
 Emojiis make it a little funny for my young students.
 
 You can try it here: https://www.barattalo.it/quiz
-
-## Improvements
-
-- if players file is empty let the users write their own name without select
-- use different "domande" json files for topics, use different folder for pics based on same "domande" file name
-- let the user choose the topic for questions
