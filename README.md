@@ -5,6 +5,11 @@ No database needed, just json files to store data.
 
 ## Instructions
 
+Download everything, edit json files and upload on your desired folder in your website.
+Navigate to that folder.
+
+### Customization
+
 Questions and answers are stored in topics folder as json files (example: `arduino.json`).
 In questions you can use HTML, short questions are preferred.
 If you use `<img>` tags in HTML, store the images in a subfolder with the same name of the topic (example: `arduino` folder inside `topics` folder).
