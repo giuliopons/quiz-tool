@@ -13,7 +13,7 @@ function startQuiz() {
         setTimeout(() => document.getElementById('topic-select').classList.remove('blink_me'), 2000);
         return;
     }
-    
+
     playerName = document.getElementById('player-select').value;
     if (!playerName) {
         document.getElementById('player-select').classList.add('blink_me');
@@ -172,4 +172,11 @@ function populateQuizData() {
 
 window.onload = function() {
     populatePlayerSelect();
+
+    const topicSelect = document.getElementById('topic-select');
+    if (topicSelect.options.length === 2) {
+        document.getElementById('topic-selection').style.display = 'none';
+        topicSelect.options[1].selected = true;
+    }
+        
 }
