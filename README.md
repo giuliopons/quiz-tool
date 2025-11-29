@@ -15,6 +15,6 @@ You can try it here: https://www.barattalo.it/quiz
 
 ## Improvements
 
-- players name in a separate json file, if it is empty let the users write their own name without select
+- if players file is empty let the users write their own name without select
 - use different "domande" json files for topics, use different folder for pics based on same "domande" file name
 - let the user choose the topic for questions

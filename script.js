@@ -7,12 +7,25 @@ let playerName = "";
 let correctCount = 0;
 
 function startQuiz() {
-    playerName = document.getElementById('player-select').value;
-    if (!playerName) {
-        alert("Seleziona il tuo nome prima di iniziare!");
+    topicName = document.getElementById('topic-select').value;
+    if (!topicName) {
+        document.getElementById('topic-select').classList.add('blink_me');
+        setTimeout(() => document.getElementById('topic-select').classList.remove('blink_me'), 2000);
         return;
     }
+    
+    playerName = document.getElementById('player-select').value;
+    if (!playerName) {
+        document.getElementById('player-select').classList.add('blink_me');
+        setTimeout(() => document.getElementById('player-select').classList.remove('blink_me'), 2000);
+        return;
+    }
+    
+    populateQuizData();
+
+    document.getElementById('big-title').style.display = 'none';
     document.getElementById('player-selection').style.display = 'none';
+    document.getElementById('topic-selection').style.display = 'none';
     document.getElementById('start-btn').style.display = 'none';
     document.getElementById('quiz-interface').classList.remove('hidden');
     showQuestion();
@@ -86,9 +99,13 @@ function submitAnswer(answer) {
         correctCount++;
         // document.getElementById('rispostina').style.color = 'green';
         document.getElementById('rispostina').innerHTML = "BENE!";
+        const audio = new Audio('./ok.mp3');
+        audio.play();
     } else {
         // document.getElementById('rispostina').style.color = 'red';
         // document.getElementById('rispostina').innerHTML = (answer ? 'VERO' : 'FALSO' ) + ' è SBAGLIATO!';
+        const audio = new Audio('./ko.mp3');
+        audio.play();        
     }
     currentQuestion++;
     // wait 5 seconds than show the new question or send result
@@ -137,11 +154,14 @@ function populatePlayerSelect() {
 }
 
 function populateQuizData() {
-    fetch('quizdata.json')
+    topic = document.getElementById('topic-select').value;
+    fetch('./topics/' + topic + '.json')
     .then(response => response.json())
     .then(data => {
         const questionsAndAnswers = data;
-        questions = questionsAndAnswers.map(qa => qa.question);
+        questions = questionsAndAnswers.map(qa => {
+            return qa.question.replace(/src\s*=\s*(['"])(.*?)(['"])/g, "src=$1./topics/" + topic + "/$2$3");
+        });
         correctAnswers = questionsAndAnswers.map(qa => qa.answer);
     })
     .catch(error => {
@@ -152,7 +172,4 @@ function populateQuizData() {
 
 window.onload = function() {
     populatePlayerSelect();
-
-    populateQuizData();
-
 }

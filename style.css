@@ -7,13 +7,13 @@
 }
 
 body, html {box-sizing:border-box;font-size:16px;
-           
-           background:#111;
-            color:#fff;
+    background:#111;
+    color:#fff;
+    text-align:center;
+    margin:0;padding:0;
+    user-select: none;
+}
 
-            text-align:center;
-            margin:0;padding:0;
-           }
 
 html {
     height:100%;
@@ -37,9 +37,9 @@ button {
     border:0;
     border-radius:1rem;
     text-transform:uppercase;
-    font-family:arial;
     margin:1rem;
     cursor:pointer;
+    font-weight: bold;
 }
 button:hover {
     outline:.5rem solid yellow
@@ -64,9 +64,7 @@ button.sel {
 input,select,textarea {
     padding:1rem;
     border-radius:1rem;
-    font-family:arial;
 }
-
 
 #prof .content {
     background-color:rgba(0,0,0,.8);
@@ -102,6 +100,11 @@ table{
 p {font-size:3rem;padding: 0 2rem;}
 
 #question-container span {font-size:8rem}
+#question-container img {max-width:100%}
+#topic-selection select {background:yellow}
+#player-selection select {background:orange}
+div.divider { margin: 2rem 0}
+#rispostina {height:2rem;min-height:2rem}
 
 code {background-color:gray}
 

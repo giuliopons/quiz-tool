@@ -8,12 +8,27 @@
     <script src="script.js"></script>
 </head>
 <body id='stud'>
-    <h1 class='rainbow rainbow_text_animated'>IL QUIZZONE!</h1>
+    <h1 id='big-title' class='rainbow rainbow_text_animated'>IL QUIZZONE!</h1>
+    <div id="topic-selection">
+        <h2>Seleziona l'argomento</h2>
+        <select id="topic-select">
+            <option value="">-- Scegli --</option>
+            <?php
+            $files = glob('./topics/*.json');
+            foreach ($files as $file) {
+                $topicName = basename($file, '.json');
+                echo "<option value='$topicName'>$topicName</option>";
+            }
+            ?>
+        </select>
+        <div class='divider'>💥</div>
+    </div>
     <div id="player-selection">
         <h2>Seleziona il tuo nome</h2>
         <select id="player-select">
-            <option value="">-- Scegli il tuo nome --</option>
+            <option value="">-- Scegli --</option>
         </select>
+        <div class='divider'>⭐</div>
     </div>
     <button id="start-btn" onclick="startQuiz()">Inizia Quiz</button>
     <div id="quiz-interface" class="hidden">
