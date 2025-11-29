@@ -58,5 +58,10 @@
         "name": "Jacopo",
         "score": 300,
         "correctAnswers": 30
+    },
+    {
+        "name": "Gabriele",
+        "score": 290,
+        "correctAnswers": 29
     }
 ]
