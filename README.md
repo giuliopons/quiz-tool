@@ -22,3 +22,7 @@ Results are shown in realtime on the teacher device or on LIM as a top hit score
 Emojiis make it a little funny for my young students.
 
 You can try it here: https://www.barattalo.it/quiz
+
+## Next steps
+
+Handle different results for different topic
