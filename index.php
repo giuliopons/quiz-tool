@@ -6,8 +6,9 @@
     <title>Quizzone</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        const questions = <?php include('domande.json'); ?>;
-        const correctAnswers = <?php include('risposte.json'); ?>;
+        const questionsAndAnswers = <?php include('quizdata.json'); ?>;
+        const questions = questionsAndAnswers.map(qa => qa.question);
+        const correctAnswers = questionsAndAnswers.map(qa => qa.answer);
         let currentQuestion = 0;
         let score = 0;
         let playerName = "";
