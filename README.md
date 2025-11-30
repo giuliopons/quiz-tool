@@ -31,4 +31,4 @@ If you use `<img>` tags in HTML, store the images in the same subfolder topic.
 
 ## Next steps
 
-Handle different results for different topic
+Let users choose their emojii
