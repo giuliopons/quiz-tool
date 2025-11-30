@@ -27,13 +27,21 @@ html {
 h1 {position:fixed;top:0;left:0;width:100%;}
 
 a.textlink {
-	color:#fff;
-	text-decoration:underline
+	/* color:#fff; */
+	text-decoration:none;
+    display:inline-block;
+    text-transform:uppercase;
+    height:3rem;font-size:1rem;
+    line-height:3rem;
+    padding:0 2rem;
+    border: .2rem dashed #fff;
+    border-radius:1rem;font-weight: bold;
+
 }
 button {
     height:3rem;
     padding:0 2rem;
-    background:aquamarine;
+    background:aquamarine;font-size:1rem;
     border:0;
     border-radius:1rem;
     text-transform:uppercase;
@@ -81,14 +89,15 @@ input,select,textarea {
 
 
 table{
-        border-collapse: collapse; /* Remove cell spacing */
+        border-collapse: collapse;
     }
     table, th, td{
         border: 1px solid #666;
         font-size:1.5rem;
     }
     table th, table td{
-        padding: .5rem 1rem; /* Apply cell padding */
+        padding: .5rem 1rem;
+         white-space:nowrap;
     }
 
 

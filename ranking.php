@@ -12,7 +12,7 @@
     </script>
 </head>
 <body id='prof'>
-    <h1>TOP 10 CLASSIFICONA</h1>
+    <h1>TOP 10 RANKING</h1>
     <div class='content'>
     <table id='top' border="1">
         <thead>
@@ -25,7 +25,7 @@
         <tbody id="scoreboard-body"></tbody>
     </table>
 	<br><br>
-	<a href="index.php" class="textlink">GIOCA</a>
+	<a href="index.php" class="textlink rainbow rainbow_text_animated">PLAY</a>
     </div>
 
 <?php

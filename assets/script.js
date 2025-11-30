@@ -62,7 +62,7 @@ function showQuestion() {
             });
             document.getElementById('rispostina').innerHTML = '';
             document.getElementById('question-container').innerHTML = 
-            `<h3>Domanda ${currentQuestion + 1} di ${questions.length}</h3><p>${questions[currentQuestion]}</p>`;
+            `<h3>Question ${currentQuestion + 1} of ${questions.length}</h3><p>${questions[currentQuestion]}</p>`;
         });
 
     
@@ -105,7 +105,7 @@ function submitAnswer(answer) {
         score += 10;
         correctCount++;
         // document.getElementById('rispostina').style.color = 'green';
-        document.getElementById('rispostina').innerHTML = "BENE!";
+        document.getElementById('rispostina').innerHTML = "WELL DONE!";
         audioOk.play();
     } else {
         // document.getElementById('rispostina').style.color = 'red';
@@ -141,8 +141,8 @@ function sendResults() {
     document.getElementById('results').classList.remove('hidden');
     document.getElementById('SCORE').innerHTML = score;
 
-    document.getElementById('final-score').innerHTML = 
-        `${playerName}, hai risposto correttamente a ${correctCount} domande su ${questions.length}`;
+    document.getElementById('final-score').innerHTML = `Hey ${playerName}, this is your score.`;
+
 }
 
 function populatePlayerSelect() {
@@ -204,10 +204,10 @@ function fetchResults() {
     setTimeout(fetchResults, 10000);
 }
 
-// const allowedEmoji = [
-//     '😊','🙃','🤪','🤓','🤯','😴','💩','👻','👽','🤖',
-//     '👾','👐','🖖','✌️','🤟','🤘','🤙','👋','🐭','🦕',
-//     '🦖','🐉','⭐','🔥','🏓','🐮','👁️'];
+const allowedEmoji = [
+    '😊','🙃','🤪','🤓','🤯','😴','💩','👻','👽','🤖',
+    '👾','👐','🖖','✌️','🤟','🤘','🤙','👋','🐭','🦕',
+    '🦖','🐉','⭐','🔥','🏓','🐮','👁️'];
 
 function updateLeaderboard(results,players) {
 
@@ -226,6 +226,10 @@ function updateLeaderboard(results,players) {
                     icon = player.icon;
                 }
             });
+            if (icon === '' ) {
+                const randomIndex = Math.floor(Math.random() * allowedEmoji.length);
+                icon = allowedEmoji[randomIndex];
+            }
             let row = document.createElement('tr');
             row.innerHTML = `<td>${index + 1}</td><td>${student.name}${icon}</td><td>${student.score}</td>`;
             scoreboardBody.appendChild(row);
