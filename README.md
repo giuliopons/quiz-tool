@@ -1,6 +1,6 @@
 # QUIZ TOOL
 
-This is am easy quiz game for classrooms, made with PHP/js,css,html.
+This is a simple quiz game for classrooms, made with PHP/js,css,html.
 No database needed, just json files to store data.
 
 ## Instructions
