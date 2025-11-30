@@ -16,7 +16,7 @@ Emojiis make it a little funny.
 
 You can try it here: https://www.barattalo.it/quiz
 
-## Files
+## Customize for a new topic and classroom
 - create a subfolder inside `topics` with the topic name, inside that folder create a `quizdata.json` file (you can copy the structure from another `quizdata.json` file)
 - edit the `players.json` file in the main `quiz` folder to add your students (you can remove existing names)
 - make sure that PHP can write in the `topics` subfolders to properly write the `results.json` file
