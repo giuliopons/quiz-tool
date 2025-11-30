@@ -12,20 +12,46 @@
     </script>
 </head>
 <body id='prof'>
-    <h1>TOP 10 RANKING</h1>
     <div class='content'>
-    <table id='top' border="1">
-        <thead>
-            <tr>
-                <th>RANK</th>
-                <th>WHO</th>
-                <th>SCORE</th>
-            </tr>
-        </thead>
-        <tbody id="scoreboard-body"></tbody>
-    </table>
-	<br><br>
-	<a href="index.php" class="textlink rainbow rainbow_text_animated">PLAY</a>
+        <h1>TOP 10 RANKING</h1>
+        <?php
+        $topic = isset($_GET['topic']) ? $_GET['topic'] : 'default';
+        if($topic == 'default') {
+            ?>        
+            <h2>Select Topic</h2>
+            <select id="topic-select" onchange="document.location.href='ranking.php?topic='+this.value">
+                <option value="">-- Choose --</option>
+                <?php
+                $files = glob('./topics/*', GLOB_ONLYDIR);
+                foreach ($files as $file) {
+                    if(is_dir($file)) {
+                        $topicName = basename($file);
+                        echo "<option value='$topicName'>$topicName</option>";
+                    }
+                }
+                ?>
+            </select>
+            <?php
+        } else {
+            ?>
+            <table id='top' border="1">
+                <thead>
+                    <tr>
+                        <th colspan="3"><?php echo htmlspecialchars($topic); ?></th>
+                    </tr>
+                    <tr>
+                        <th>RANK</th>
+                        <th>WHO</th>
+                        <th>SCORE</th>
+                    </tr>
+                </thead>
+                <tbody id="scoreboard-body"></tbody>
+            </table>
+            <?php
+        }
+        ?>
+        <br><br>
+        <a href="index.php" class="textlink rainbow rainbow_text_animated">PLAY</a>
     </div>
 
 <?php

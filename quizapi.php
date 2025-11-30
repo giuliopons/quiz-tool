@@ -6,15 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Riceve i dati dallo studente
     $data = json_decode(file_get_contents('php://input'), true);
     $filename = './topics/' . $data['topic'] . '/results.json';
-    if ($data) {
+    if ($data && isset($data['name']) && isset($data['score']) && isset($data['correctAnswers']) && isset($data['topic'])) {
         $currentData = [];
         if (file_exists($filename)) {
             $currentData = json_decode(file_get_contents($filename), true);
         }
+        $data['datetime'] = date('Y-m-d H:i:s');
         $currentData[] = $data;
         file_put_contents($filename, json_encode($currentData, JSON_PRETTY_PRINT));
+        echo json_encode(["status" => "success"]);
+    } else {
+        echo json_encode(["status" => "fail"]);
     }
-    echo json_encode(["status" => "success"]);
     exit;
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Restituisce i dati per il professore
