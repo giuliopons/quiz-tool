@@ -1,11 +1,14 @@
 [
     {
-        "name": "Alice"
+        "name": "Alice",
+        "icon": "🤖"
     },
     {
-        "name": "Bob"
+        "name": "Bob",
+        "icon": "🤪"
     },
     {
-        "name": "Charlie"
+        "name": "Charlie",
+        "icon": "🦖"
     }
 ]

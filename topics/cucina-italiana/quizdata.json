@@ -1,0 +1,12 @@
+[
+  {"question": "La carbonara tradizionale si prepara con panna da cucina", "answer": false},
+  {"question": "Il ragù alla bolognese prevede una lunga cottura a fuoco lento", "answer": true},
+  {"question": "La pizza Margherita è nata a Napoli", "answer": true},
+  {"question": "Il pesto genovese originale si prepara senza aglio", "answer": false},
+  {"question": "Il tiramisù contiene tipicamente mascarpone", "answer": true},
+  {"question": "La focaccia ligure è famosa per essere particolarmente dolce", "answer": false},
+  {"question": "Il risotto alla milanese contiene zafferano", "answer": true},
+  {"question": "La mozzarella di bufala proviene originariamente dalla Lombardia", "answer": false},
+  {"question": "La cottura della pasta 'al dente' è una caratteristica fondamentale della cucina italiana", "answer": true},
+  {"question": "La ribollita è una zuppa tipica toscana", "answer": true}
+]

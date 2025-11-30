@@ -63,5 +63,35 @@
         "name": "Gabriele",
         "score": 290,
         "correctAnswers": 29
+    },
+    {
+        "name": "Alice",
+        "score": 20,
+        "correctAnswers": 2
+    },
+    {
+        "name": "Bob",
+        "score": 20,
+        "correctAnswers": 2
+    },
+    {
+        "name": "Alice",
+        "score": 20,
+        "correctAnswers": 2
+    },
+    {
+        "name": "Alice",
+        "score": 100,
+        "correctAnswers": 10
+    },
+    {
+        "name": "Charlie",
+        "score": 20,
+        "correctAnswers": 2
+    },
+    {
+        "name": "Bob",
+        "score": 20,
+        "correctAnswers": 2
     }
 ]

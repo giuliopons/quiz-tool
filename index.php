@@ -14,10 +14,12 @@
         <select id="topic-select">
             <option value="">-- Scegli --</option>
             <?php
-            $files = glob('./topics/*.json');
+            $files = glob('./topics/*', GLOB_ONLYDIR);
             foreach ($files as $file) {
-                $topicName = basename($file, '.json');
-                echo "<option value='$topicName'>$topicName</option>";
+                if(is_dir($file)) {
+                    $topicName = basename($file);
+                    echo "<option value='$topicName'>$topicName</option>";
+                }
             }
             ?>
         </select>
@@ -42,7 +44,7 @@
         <div id="final-score"></div>
         <button onclick="document.location.href =document.location.href ;">RIGIOCA</button>
         <br><br>
-        <a href="top10.php" class="textlink">CLASSIFICA</a>
+        <a id='rankingButton' href="#" class="textlink">CLASSIFICA</a>
     </div>
 </body>
 </html>

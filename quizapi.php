@@ -1,11 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
-$filename = 'risultati.json';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Riceve i dati dallo studente
     $data = json_decode(file_get_contents('php://input'), true);
+    $filename = './topics/' . $data['topic'] . '/results.json';
     if ($data) {
         $currentData = [];
         if (file_exists($filename)) {

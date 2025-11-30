@@ -1,3 +1,6 @@
+/* ------------------------ QUIZ LOGIC ------------------------ */
+
+
 let questions = [];
 let correctAnswers = [];
 
@@ -5,10 +8,15 @@ let currentQuestion = 0;
 let score = 0;
 let playerName = "";
 let correctCount = 0;
+let topic = "";
+
+const loade = ['🤯','🧠','💀','🤓'];
+const audioOk = new Audio('./assets/ok.mp3');
+const audioKo = new Audio('./assets/ko.mp3');
 
 function startQuiz() {
-    topicName = document.getElementById('topic-select').value;
-    if (!topicName) {
+    topic = document.getElementById('topic-select').value;
+    if (!topic) {
         document.getElementById('topic-select').classList.add('blink_me');
         setTimeout(() => document.getElementById('topic-select').classList.remove('blink_me'), 2000);
         return;
@@ -31,7 +39,6 @@ function startQuiz() {
     showQuestion();
 }
 
-const loade = ['🤯','🧠','💀','🤓']
 
 function showQuestion() {
 
@@ -99,13 +106,12 @@ function submitAnswer(answer) {
         correctCount++;
         // document.getElementById('rispostina').style.color = 'green';
         document.getElementById('rispostina').innerHTML = "BENE!";
-        const audio = new Audio('./ok.mp3');
-        audio.play();
+        audioOk.play();
     } else {
         // document.getElementById('rispostina').style.color = 'red';
         // document.getElementById('rispostina').innerHTML = (answer ? 'VERO' : 'FALSO' ) + ' è SBAGLIATO!';
-        const audio = new Audio('./ko.mp3');
-        audio.play();        
+
+        audioKo.play();        
     }
     currentQuestion++;
     // wait 5 seconds than show the new question or send result
@@ -124,7 +130,7 @@ function sendResults() {
     fetch('quizapi.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: playerName, score: score, correctAnswers: correctCount })
+        body: JSON.stringify({ name: playerName, score: score, correctAnswers: correctCount, topic: topic  })
     }).then(response => response.json())
         .then(data => function(){
 
@@ -155,7 +161,8 @@ function populatePlayerSelect() {
 
 function populateQuizData() {
     topic = document.getElementById('topic-select').value;
-    fetch('./topics/' + topic + '.json')
+    console.log('Loading topic:', './topics/' + topic + '/quizdata.json');
+    fetch('./topics/' + topic + '/quizdata.json')
     .then(response => response.json())
     .then(data => {
         const questionsAndAnswers = data;
@@ -168,15 +175,88 @@ function populateQuizData() {
         console.error('Errore caricamento dati:', error);
     });
 
+    document.getElementById('rankingButton').href = './ranking.php?topic=' + document.getElementById('topic-select').value;
+
 }
 
-window.onload = function() {
-    populatePlayerSelect();
 
-    const topicSelect = document.getElementById('topic-select');
-    if (topicSelect.options.length === 2) {
-        document.getElementById('topic-selection').style.display = 'none';
-        topicSelect.options[1].selected = true;
+
+
+
+
+/* ------------------------ RANKING ------------------------ */
+
+
+
+/**
+ * Fetch and update leaderboard every 10 seconds
+ */
+function fetchResults() {
+    fetch('players.json')
+        .then(response => response.json())
+        .then(players => {
+            const topic = new URLSearchParams(window.location.search).get('topic') || 'default';
+            fetch('./topics/'+ topic + '/results.json?'+ Math.random())
+                .then(response => response.json())
+                .then(data => updateLeaderboard(data,players));
+
+        });
+    setTimeout(fetchResults, 10000);
+}
+
+// const allowedEmoji = [
+//     '😊','🙃','🤪','🤓','🤯','😴','💩','👻','👽','🤖',
+//     '👾','👐','🖖','✌️','🤟','🤘','🤙','👋','🐭','🦕',
+//     '🦖','🐉','⭐','🔥','🏓','🐮','👁️'];
+
+function updateLeaderboard(results,players) {
+
+    const scoreboardBody = document.getElementById('scoreboard-body');
+    scoreboardBody.innerHTML = "";
+
+    results.sort((a, b) => b.score - a.score);
+
+    var i = 0;
+    results.forEach((student, index) => {
+        i++;
+        if(i<=10){
+            let icon = '';
+            players.forEach(player => {
+                if(player.name === student.name) {
+                    icon = player.icon;
+                }
+            });
+            let row = document.createElement('tr');
+            row.innerHTML = `<td>${index + 1}</td><td>${student.name}${icon}</td><td>${student.score}</td>`;
+            scoreboardBody.appendChild(row);
+        }
+    });
+    if(i==0) {
+        document.getElementById('top').classList.add('hidden');
+    } else {
+        document.getElementById('top').classList.remove('hidden');
+    }
+}
+
+
+window.onload = function() {
+
+    if( document.getElementById('stud') ) {
+        // QUIZ PAGE
+
+        // Populate players select
+        populatePlayerSelect();
+
+        // If only one topic is available, select it automatically
+        const topicSelect = document.getElementById('topic-select');
+        if (topicSelect.options.length === 2) {
+            document.getElementById('topic-selection').style.display = 'none';
+            topicSelect.options[1].selected = true;
+        }
+    } else {
+
+        // RANKING PAGE
+        fetchResults();
     }
         
 }
