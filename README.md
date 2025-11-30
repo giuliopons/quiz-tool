@@ -7,8 +7,11 @@ No database needed, just json files to store data.
 
 Download everything, edit json files and upload on your desired folder in your website.
 Navigate to that folder.
+
 Users students play the quiz from their PC or device.
+
 Results are shown in realtime on the teacher device or on LIM as a top hit score ranking page.
+
 Emojiis make it a little funny for my young students.
 
 You can try it here: https://www.barattalo.it/quiz
