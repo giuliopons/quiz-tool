@@ -167,7 +167,10 @@ function populateQuizData() {
     fetch('./topics/' + topic + '/quizdata.json')
     .then(response => response.json())
     .then(data => {
-        const questionsAndAnswers = data;
+        const payload = Array.isArray(data) ? { domande: data } : data;
+        const questionsAndAnswers = Array.isArray(payload.domande)
+            ? payload.domande
+            : (Array.isArray(payload.questions) ? payload.questions : []);
         questions = questionsAndAnswers.map(qa => {
             return qa.question.replace(/src\s*=\s*(['"])(.*?)(['"])/g, "src=$1./topics/" + topic + "/$2$3");
         });

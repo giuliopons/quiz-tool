@@ -18,7 +18,24 @@
             foreach ($files as $file) {
                 if(is_dir($file)) {
                     $topicName = basename($file);
-                    echo "<option value='$topicName'>$topicName</option>";
+                    $topicLabel = $topicName;
+                    $quizFile = $file . '/quizdata.json';
+                    if (file_exists($quizFile)) {
+                        $quizJson = json_decode(file_get_contents($quizFile), true);
+                        if (is_array($quizJson)) {
+                            if (isset($quizJson['titolo']) && is_string($quizJson['titolo'])) {
+                                $title = trim($quizJson['titolo']);
+                            } elseif (isset($quizJson['title']) && is_string($quizJson['title'])) {
+                                $title = trim($quizJson['title']);
+                            } else {
+                                $title = '';
+                            }
+                            if ($title !== '') {
+                                $topicLabel = $title;
+                            }
+                        }
+                    }
+                    echo "<option value='$topicName'>$topicLabel</option>";
                 }
             }
             ?>
