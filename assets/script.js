@@ -10,6 +10,10 @@ let playerName = "";
 let correctCount = 0;
 let topic = "";
 
+function isFreeUser() {
+    return typeof window !== 'undefined' && window.QUIZ_FREE_USER === true;
+}
+
 const loade = ['🤯','🧠','💀','🤓'];
 const audioOk = new Audio('./assets/ok.mp3');
 const audioKo = new Audio('./assets/ko.mp3');
@@ -22,11 +26,20 @@ function startQuiz() {
         return;
     }
 
-    playerName = document.getElementById('player-select').value;
-    if (!playerName) {
-        document.getElementById('player-select').classList.add('blink_me');
-        setTimeout(() => document.getElementById('player-select').classList.remove('blink_me'), 2000);
-        return;
+    if (isFreeUser()) {
+        playerName = (document.getElementById('player-input').value || '').trim();
+        if (playerName.length < 2) {
+            document.getElementById('player-input').classList.add('blink_me');
+            setTimeout(() => document.getElementById('player-input').classList.remove('blink_me'), 2000);
+            return;
+        }
+    } else {
+        playerName = document.getElementById('player-select').value;
+        if (!playerName) {
+            document.getElementById('player-select').classList.add('blink_me');
+            setTimeout(() => document.getElementById('player-select').classList.remove('blink_me'), 2000);
+            return;
+        }
     }
     
     populateQuizData();
@@ -35,7 +48,7 @@ function startQuiz() {
     document.getElementById('player-selection').style.display = 'none';
     document.getElementById('topic-selection').style.display = 'none';
     document.getElementById('start-btn').style.display = 'none';
-    document.getElementById('create-btn').style.display = 'none';
+    if(document.getElementById('create-btn')) document.getElementById('create-btn').style.display = 'none';
     document.getElementById('create-status').style.display = 'none';
     document.querySelectorAll('.quiz-bg').forEach(el => el.classList.remove('hidden'));
     document.getElementById('quiz-interface').classList.remove('hidden');
@@ -150,6 +163,9 @@ function sendResults() {
 }
 
 function populatePlayerSelect() {
+    if (isFreeUser()) {
+        return;
+    }
     fetch('players.json')
         .then(response => response.json())
         .then(players => {

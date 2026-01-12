@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+include("config.php");
+?><!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -46,14 +48,25 @@
         <div class='divider'>💥</div>
     </div>
     <div id="player-selection">
-        <h2>Name</h2>
+    <h2>Name</h2>
+    <?php if ($ACTIVATE_FREE_USER) { ?>
+        <input id="player-input" type="text" placeholder="Your name" maxlength="32">
+    <?php } else { ?>
         <select id="player-select">
             <option value="">-- Choose --</option>
         </select>
-        <div class='divider'>⭐</div>
-    </div>
-    <button id="start-btn" onclick="startQuiz()">START</button>
-    <button id="create-btn" onclick="createQuiz()">CREA QUIZ</button>
+    <?php } ?>
+    <div class='divider'>💥</div>
+</div>
+<button id="start-btn" onclick="startQuiz()">START</button>
+<script>
+    window.QUIZ_FREE_USER = <?php echo $ACTIVATE_FREE_USER ? 'true' : 'false'; ?>;
+</script>
+    <?php
+    if($ACTIVATE_CREATION) {
+        ?><button id="create-btn" onclick="createQuiz()">CREA QUIZ</button><?php        
+    }
+    ?>
     <div id="create-status"></div>
     <div id="quiz-interface" class="hidden">
         <div id="question-container"></div>
@@ -70,3 +83,5 @@
     </div>
 </body>
 </html>
+
+
