@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-include("common.php");
+include("config.php");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
