@@ -35,6 +35,8 @@ function startQuiz() {
     document.getElementById('player-selection').style.display = 'none';
     document.getElementById('topic-selection').style.display = 'none';
     document.getElementById('start-btn').style.display = 'none';
+    document.getElementById('create-btn').style.display = 'none';
+    document.getElementById('create-status').style.display = 'none';
     document.getElementById('quiz-interface').classList.remove('hidden');
     showQuestion();
 }
@@ -177,6 +179,39 @@ function populateQuizData() {
 
     document.getElementById('rankingButton').href = './ranking.php?topic=' + document.getElementById('topic-select').value;
 
+}
+
+function createQuiz() {
+    const topicName = window.prompt('Inserisci l\'argomento del quiz');
+    if (!topicName) {
+        return;
+    }
+
+    const statusEl = document.getElementById('create-status');
+    const btn = document.getElementById('create-btn');
+    btn.disabled = true;
+    statusEl.textContent = 'Sto creando il quiz...';
+
+    fetch('createquiz.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: topicName })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                statusEl.textContent = 'Quiz creato: ' + data.topic;
+                setTimeout(() => window.location.reload(), 800);
+            } else {
+                statusEl.textContent = data.message || 'Errore durante la creazione del quiz.';
+                btn.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Errore creazione quiz:', error);
+            statusEl.textContent = 'Errore di rete durante la creazione del quiz.';
+            btn.disabled = false;
+        });
 }
 
 

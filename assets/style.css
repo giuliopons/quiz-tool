@@ -53,6 +53,10 @@ button {
 button:hover {
     outline:.5rem solid yellow
 }
+button:disabled {
+    opacity:0.6;
+    cursor:not-allowed;
+}
 button.locked {
     cursor:default;
     outline:none!important;
@@ -115,6 +119,7 @@ p {font-size:3rem;padding: 0 2rem;}
 #player-selection select {background:orange}
 div.divider { margin: 2rem 0}
 #rispostina {height:2rem;min-height:2rem}
+#create-status {min-height:2rem;margin-top:0.5rem}
 
 code {background-color:gray}
 

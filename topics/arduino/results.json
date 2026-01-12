@@ -93,5 +93,11 @@
         "name": "Bob",
         "score": 20,
         "correctAnswers": 2
+    },
+    {
+        "name": "Alice",
+        "score": 170,
+        "correctAnswers": 17,
+        "topic": "arduino"
     }
 ]

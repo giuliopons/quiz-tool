@@ -33,6 +33,8 @@
         <div class='divider'>⭐</div>
     </div>
     <button id="start-btn" onclick="startQuiz()">START</button>
+    <button id="create-btn" onclick="createQuiz()">CREA QUIZ</button>
+    <div id="create-status"></div>
     <div id="quiz-interface" class="hidden">
         <div id="question-container"></div>
         <button onclick="submitAnswer(true)" id='vero'>TRUE</button>
