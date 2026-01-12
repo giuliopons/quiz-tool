@@ -37,6 +37,7 @@ function startQuiz() {
     document.getElementById('start-btn').style.display = 'none';
     document.getElementById('create-btn').style.display = 'none';
     document.getElementById('create-status').style.display = 'none';
+    document.querySelectorAll('.quiz-bg').forEach(el => el.classList.remove('hidden'));
     document.getElementById('quiz-interface').classList.remove('hidden');
     showQuestion();
 }
@@ -140,6 +141,7 @@ function sendResults() {
         .catch(error => console.error('Errore invio dati:', error));
 
     document.getElementById('quiz-interface').classList.add('hidden');
+    document.querySelectorAll('.quiz-bg').forEach(el => el.classList.add('hidden'));
     document.getElementById('results').classList.remove('hidden');
     document.getElementById('SCORE').innerHTML = score;
 

@@ -8,6 +8,9 @@
     <script src="assets/script.js"></script>
 </head>
 <body id='stud'>
+    <div id="quiz-bg-1" class="quiz-bg hidden"></div>
+    <div id="quiz-bg-2" class="quiz-bg quiz-bg-2 hidden"></div>
+    <div id="quiz-bg-3" class="quiz-bg quiz-bg-3 hidden"></div>
     <h1 id='big-title' class='rainbow rainbow_text_animated'>QUIZZZONE</h1>
     <div id="topic-selection">
         <h2>Topic</h2>
