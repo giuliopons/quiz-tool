@@ -1,4 +1,10 @@
 
+<?php
+/**
+ * Ranking page for professors to view the top 10 quiz results for a selected topic.
+ */
+include("config.php");
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,19 +21,23 @@
     <div class='content'>
         <h1>TOP 10 RANKING</h1>
         <?php
-        $topic = isset($_GET['topic']) ? $_GET['topic'] : 'default';
+        $availableTopics = getAvailableQuizTopics('./topics');
+        $topic = isset($_GET['topic']) ? trim((string)$_GET['topic']) : 'default';
+        if ($topic !== 'default') {
+            $topic = trim(normalizeQuizTopicSlug($topic), '-');
+        }
+        if ($topic !== 'default' && !in_array($topic, $availableTopics, true)) {
+            $topic = 'default';
+        }
         if($topic == 'default') {
             ?>        
             <h2>Select Topic</h2>
             <select id="topic-select" onchange="document.location.href='ranking.php?topic='+this.value">
                 <option value="">-- Choose --</option>
                 <?php
-                $files = glob('./topics/*', GLOB_ONLYDIR);
-                foreach ($files as $file) {
-                    if(is_dir($file)) {
-                        $topicName = basename($file);
-                        echo "<option value='$topicName'>$topicName</option>";
-                    }
+                foreach ($availableTopics as $topicName) {
+                    $topicEscaped = htmlspecialchars($topicName, ENT_QUOTES, 'UTF-8');
+                    echo "<option value='$topicEscaped'>$topicEscaped</option>";
                 }
                 ?>
             </select>
@@ -57,7 +67,7 @@
 <?php
 
 
-    $topic = isset($_GET['topic']) ? $_GET['topic'] : 'default';
+    $topic = isset($topic) ? $topic : 'default';
     $hash = hash('crc32', $topic);
     $r = hexdec(substr($hash, 0, 2)) % 25 * 10;
     $g = hexdec(substr($hash, 2, 2)) % 25 * 10;

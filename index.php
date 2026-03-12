@@ -6,8 +6,8 @@ include("config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizzone</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="assets/style.css?1">
+    <script src="assets/script.js?1"></script>
 </head>
 <body id='stud'>
     <div id="quiz-bg-1" class="quiz-bg hidden"></div>
@@ -15,33 +15,32 @@ include("config.php");
     <div id="quiz-bg-3" class="quiz-bg quiz-bg-3 hidden"></div>
     <h1 id='big-title' class='rainbow rainbow_text_animated'>QUIZZZONE</h1>
     <div id="topic-selection">
-        <h2>Topic</h2>
+        <h2 id="topic-title">Topic</h2>
         <select id="topic-select">
             <option value="">-- Choose --</option>
             <?php
-            $files = glob('./topics/*', GLOB_ONLYDIR);
-            foreach ($files as $file) {
-                if(is_dir($file)) {
-                    $topicName = basename($file);
-                    $topicLabel = $topicName;
-                    $quizFile = $file . '/quizdata.json';
-                    if (file_exists($quizFile)) {
-                        $quizJson = json_decode(file_get_contents($quizFile), true);
-                        if (is_array($quizJson)) {
-                            if (isset($quizJson['titolo']) && is_string($quizJson['titolo'])) {
-                                $title = trim($quizJson['titolo']);
-                            } elseif (isset($quizJson['title']) && is_string($quizJson['title'])) {
-                                $title = trim($quizJson['title']);
-                            } else {
-                                $title = '';
-                            }
-                            if ($title !== '') {
-                                $topicLabel = $title;
-                            }
+            $availableTopics = getAvailableQuizTopics('./topics');
+            foreach ($availableTopics as $topicName) {
+                $topicLabel = $topicName;
+                $topicNameEscaped = htmlspecialchars($topicName, ENT_QUOTES, 'UTF-8');
+                $quizFile = './topics/' . $topicName . '/quizdata.json';
+                if (file_exists($quizFile)) {
+                    $quizJson = json_decode(file_get_contents($quizFile), true);
+                    if (is_array($quizJson)) {
+                        if (isset($quizJson['titolo']) && is_string($quizJson['titolo'])) {
+                            $title = trim($quizJson['titolo']);
+                        } elseif (isset($quizJson['title']) && is_string($quizJson['title'])) {
+                            $title = trim($quizJson['title']);
+                        } else {
+                            $title = '';
+                        }
+                        if ($title !== '') {
+                            $topicLabel = $title;
                         }
                     }
-                    echo "<option value='$topicName'>$topicLabel</option>";
                 }
+                $topicLabelEscaped = htmlspecialchars($topicLabel, ENT_QUOTES, 'UTF-8');
+                echo "<option value='$topicNameEscaped'>$topicLabelEscaped</option>";
             }
             ?>
         </select>

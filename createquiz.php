@@ -1,4 +1,8 @@
 <?php
+/**
+ * Endpoint for creating new quizzes using an LLM.
+ * 
+ */
 header('Content-Type: application/json');
 
 include("config.php");

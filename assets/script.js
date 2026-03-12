@@ -310,7 +310,8 @@ window.onload = function() {
         // If only one topic is available, select it automatically
         const topicSelect = document.getElementById('topic-select');
         if (topicSelect.options.length === 2) {
-            document.getElementById('topic-selection').style.display = 'none';
+            document.getElementById('topic-title').innerHTML = topicSelect.options[1].text;
+            document.getElementById('topic-select').style.display = 'none';
             topicSelect.options[1].selected = true;
         }
     } else {
