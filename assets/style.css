@@ -76,8 +76,10 @@ button {
     cursor:pointer;
     font-weight: bold;
 }
-button:hover {
-    outline:.5rem solid yellow
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        outline:.5rem solid yellow
+    }
 }
 button:disabled {
     opacity:0.6;
