@@ -14,7 +14,7 @@ $ACTIVATE_FREE_USER = false;
 // list of allowed quiz topic slugs (folder names inside ./topics)
 // example: $AVAILABLE_QUIZZES = ['arduino', 'demo'];
 // if empty, all available topics are allowed
-$AVAILABLE_QUIZZES = ['arduino', 'demo'];
+$AVAILABLE_QUIZZES = ['arduino-2026'];
 
 
 // include common functions

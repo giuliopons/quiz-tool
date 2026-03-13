@@ -1,14 +1,30 @@
 [
     {
-        "name": "Alice",
+        "name": "Arianna",
         "icon": "🤖"
     },
     {
-        "name": "Bob",
-        "icon": "🤪"
+        "name": "Cristian",
+        "icon": "🥷"
     },
     {
-        "name": "Charlie",
+        "name": "Edoardo",
+        "icon": "🫅"
+    },
+    {
+        "name": "Francesco",
+        "icon": "👾"
+    },
+    {
+        "name": "Gabriele",
+        "icon": "👻"
+    },
+    {
+        "name": "Riccardo",
+        "icon": "⛷️"
+    },
+    {
+        "name": "Tommaso",
         "icon": "🦖"
     }
 ]
